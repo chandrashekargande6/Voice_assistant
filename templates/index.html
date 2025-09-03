@@ -1,156 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Groq Voice Assistant</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Assistant</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #141e30, #243b55);
-      color: white;
       margin: 0;
+      font-family: Arial, sans-serif;
       display: flex;
       height: 100vh;
+      overflow: hidden;
     }
 
     /* Sidebar */
     #sidebar {
       width: 250px;
-      flex-shrink: 0;
-      background: #1c2533;
-      padding: 15px;
+      background: #1f2937;
+      color: white;
+      padding: 10px;
       display: flex;
       flex-direction: column;
-      border-right: 2px solid #2e3b4e;
+      transition: transform 0.3s ease;
     }
 
-    #sidebar h2 { font-size: 18px; margin-bottom: 12px; }
-    .sidebar-btn {
-      background: #2e3b4e;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 8px 10px;
-      margin: 4px 0;
-      cursor: pointer;
-      text-align: left;
-      font-size: 14px;
+    #sidebar h2 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
     }
-    .sidebar-btn:hover { background: #3c4b63; }
-    #chatList { margin-top: 10px; flex-grow: 1; overflow-y: auto; }
 
-    /* Chat list items */
-    .chat-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #2e3b4e;
-      margin: 6px 0;
-      padding: 8px;
-      border-radius: 8px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-    .chat-item span { flex-grow: 1; }
-
-    /* Menu */
-    .message-menu { position: relative; }
-    .menu-btn {
-      background: none; border: none; color: white;
-      font-size: 18px; cursor: pointer; padding: 0 6px;
-    }
-    .menu-options {
-      display: none; position: absolute; right: 0; top: 20px;
-      background: #2c2c2c; min-width: 120px; border-radius: 8px;
-      box-shadow: 0px 2px 8px rgba(0,0,0,0.3); z-index: 10;
-    }
-    .menu-options button {
-      width: 100%; background: none; border: none; color: white;
-      text-align: left; padding: 8px 12px; cursor: pointer; font-size: 14px;
-    }
-    .menu-options button:hover { background: #444; }
-
-    /* Main area */
-    #main { flex-grow: 1; display: flex; flex-direction: column; padding: 20px; overflow: hidden; }
-    h1 { font-size: 24px; margin-bottom: 10px; text-align: center; }
-    #chatbox {
+    #chatList {
       flex-grow: 1;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 20px;
       overflow-y: auto;
     }
 
-    .message { margin: 10px 0; padding: 10px; border-radius: 10px; max-width: 80%; word-wrap: break-word; }
-    .user { background: #4cafef; color: white; text-align: right; margin-left: auto; }
-    .ai   { background: #2ecc71; color: white; text-align: left; margin-right: auto; }
-
-    #controls { margin-top: 12px; display: flex; gap: 8px; justify-content: center; }
-    input {
-      padding: 10px; border-radius: 8px; border: none;
-      width: 300px; font-size: 16px;
+    .chat-item {
+      padding: 8px;
+      background: #374151;
+      margin: 5px 0;
+      border-radius: 5px;
+      cursor: pointer;
     }
-    button {
-      padding: 10px 15px; border: none; border-radius: 8px;
-      cursor: pointer; background: #ff9800; color: white; font-size: 16px;
+
+    .chat-item:hover {
+      background: #4b5563;
     }
-    button:hover { background: #e68900; }
-    .thinking { opacity: 0.85; font-style: italic; }
-    .read-btn { margin-top: 6px; background: #1976d2; font-size: 14px; padding: 6px 10px; }
-    .stop-btn { background: #d32f2f; }
 
-    /* --- List formatting inside AI messages --- */
-    .ai ol, .ai ul { margin-left: 20px; }
-    .ai li { margin: 4px 0; }
+    #sidebar button {
+      margin: 5px 0;
+      padding: 8px;
+      border: none;
+      background: #2563eb;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
 
-    /* ✅ Mobile Responsive */
+    #sidebar button:hover {
+      background: #1d4ed8;
+    }
+
+    /* Main chat area */
+    #main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      background: #f9fafb;
+    }
+
+    #messages {
+      flex-grow: 1;
+      padding: 10px;
+      overflow-y: auto;
+    }
+
+    .msg {
+      margin: 8px 0;
+    }
+
+    .user {
+      color: blue;
+    }
+
+    .assistant {
+      color: green;
+    }
+
+    #inputArea {
+      display: flex;
+      padding: 10px;
+      background: #e5e7eb;
+    }
+
+    #inputArea input {
+      flex-grow: 1;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    #inputArea button {
+      margin-left: 10px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+    }
+
+    #inputArea button:hover {
+      background: #1d4ed8;
+    }
+
+    /* Mobile Responsive */
+    #menuBtn {
+      display: none;
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
     @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-        height: auto;
-      }
-
       #sidebar {
-        width: 100%;
-        height: auto;
-        border-right: none;
-        border-bottom: 2px solid #2e3b4e;
-        flex-direction: row;
-        align-items: center;
-        overflow-x: auto;
+        position: fixed;
+        height: 100%;
+        transform: translateX(-100%);
+        z-index: 1000;
       }
-
-      #sidebar h2 {
-        display: none; /* Hide Chats label */
+      #sidebar.show {
+        transform: translateX(0);
       }
-
-      #chatList {
-        display: flex;
-        flex-direction: row;
-        overflow-x: auto;
-        flex-grow: 1;
+      #menuBtn {
+        display: block;
       }
-
-      .chat-item {
-        flex-shrink: 0;
-        margin: 4px;
-        padding: 6px;
-        font-size: 12px;
-      }
-
       #main {
-        padding: 10px;
-        height: calc(100vh - 100px);
-      }
-
-      #controls {
-        flex-direction: column;
-        gap: 6px;
-      }
-
-      input, button {
-        width: 100%;
+        flex-grow: 1;
       }
     }
   </style>
@@ -159,28 +147,98 @@
   <!-- Sidebar -->
   <div id="sidebar">
     <h2>Chats</h2>
-    <button class="sidebar-btn" onclick="newChat()">➕ New Chat</button>
-    <input type="text" id="searchInput" placeholder="🔍 Search chats" style="margin-top:10px; padding:6px; border-radius:6px; border:none; width:100%;">
+    <button onclick="newChat()">+ New Chat</button>
+    <input type="text" id="search" placeholder="Search chats" oninput="searchChats()" />
     <div id="chatList"></div>
   </div>
 
   <!-- Main -->
   <div id="main">
-    <h1>🎤 Groq Voice Assistant</h1>
-    <div id="chatbox"><p><em>🤖 Hello! I am your AI assistant. Ask me anything.</em></p></div>
-
-    <form id="chatForm" onsubmit="return handleSubmit(event)">
-      <div id="controls">
-        <input type="text" id="userInput" placeholder="Type your question..." autocomplete="off" />
-        <button id="askBtn" type="submit">Ask</button>
-        <button type="button" onclick="startVoiceInput()">🎙️ Speak</button>
-        <button type="button" onclick="stopSpeech()" class="stop-btn">🔇 Stop</button>
-      </div>
-    </form>
+    <button id="menuBtn" onclick="toggleSidebar()">☰ Menu</button>
+    <div id="messages"></div>
+    <div id="inputArea">
+      <input id="userInput" placeholder="Type your message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
   </div>
 
   <script>
-    /* JS CODE (same as your version) */
+    let chats = JSON.parse(localStorage.getItem("chats") || "[]");
+    let currentChat = null;
+
+    function saveChats() {
+      localStorage.setItem("chats", JSON.stringify(chats));
+      renderChatList();
+    }
+
+    function renderChatList() {
+      const chatList = document.getElementById("chatList");
+      chatList.innerHTML = "";
+      chats.forEach((c, i) => {
+        const div = document.createElement("div");
+        div.className = "chat-item";
+        div.textContent = c.title;
+        div.onclick = () => loadChat(i);
+        chatList.appendChild(div);
+      });
+    }
+
+    function newChat() {
+      const chat = { title: "New Chat", messages: [] };
+      chats.push(chat);
+      currentChat = chats.length - 1;
+      saveChats();
+      renderMessages();
+    }
+
+    function loadChat(index) {
+      currentChat = index;
+      renderMessages();
+      toggleSidebar(); // auto-close sidebar on mobile
+    }
+
+    function renderMessages() {
+      const messagesDiv = document.getElementById("messages");
+      messagesDiv.innerHTML = "";
+      if (currentChat === null) return;
+      chats[currentChat].messages.forEach(m => {
+        const div = document.createElement("div");
+        div.className = "msg " + (m.role === "user" ? "user" : "assistant");
+        div.textContent = (m.role === "user" ? "🧑 " : "🤖 ") + m.content;
+        messagesDiv.appendChild(div);
+      });
+    }
+
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const text = input.value.trim();
+      if (!text) return;
+      if (currentChat === null) newChat();
+      chats[currentChat].messages.push({ role: "user", content: text });
+      chats[currentChat].title = chats[currentChat].messages[0].content.slice(0, 20);
+      input.value = "";
+      saveChats();
+      renderMessages();
+      setTimeout(() => {
+        const reply = "This is a sample reply for: " + text;
+        chats[currentChat].messages.push({ role: "assistant", content: reply });
+        saveChats();
+        renderMessages();
+      }, 1000);
+    }
+
+    function searchChats() {
+      const query = document.getElementById("search").value.toLowerCase();
+      document.querySelectorAll(".chat-item").forEach(div => {
+        div.style.display = div.textContent.toLowerCase().includes(query) ? "block" : "none";
+      });
+    }
+
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("show");
+    }
+
+    renderChatList();
   </script>
 </body>
 </html>
