@@ -12,6 +12,7 @@
       display: flex;
       height: 100vh;
     }
+
     /* Sidebar */
     #sidebar {
       width: 250px;
@@ -22,7 +23,12 @@
       flex-direction: column;
       border-right: 2px solid #2e3b4e;
     }
-    #sidebar h2 { font-size: 18px; margin-bottom: 12px; }
+
+    #sidebar h2 {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
     .sidebar-btn {
       background: #2e3b4e;
       color: white;
@@ -34,8 +40,17 @@
       text-align: left;
       font-size: 14px;
     }
-    .sidebar-btn:hover { background: #3c4b63; }
-    #chatList { margin-top: 10px; flex-grow: 1; overflow-y: auto; }
+
+    .sidebar-btn:hover {
+      background: #3c4b63;
+    }
+
+    #chatList {
+      margin-top: 10px;
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+
     /* Chat list items */
     .chat-item {
       display: flex;
@@ -48,9 +63,16 @@
       font-size: 14px;
       cursor: pointer;
     }
-    .chat-item span { flex-grow: 1; }
+
+    .chat-item span {
+      flex-grow: 1;
+    }
+
     /* Menu */
-    .message-menu { position: relative; }
+    .message-menu {
+      position: relative;
+    }
+
     .menu-btn {
       background: none;
       border: none;
@@ -59,6 +81,7 @@
       cursor: pointer;
       padding: 0 6px;
     }
+
     .menu-options {
       display: none;
       position: absolute;
@@ -70,6 +93,7 @@
       box-shadow: 0px 2px 8px rgba(0,0,0,0.3);
       z-index: 10;
     }
+
     .menu-options button {
       width: 100%;
       background: none;
@@ -80,7 +104,11 @@
       cursor: pointer;
       font-size: 14px;
     }
-    .menu-options button:hover { background: #444; }
+
+    .menu-options button:hover {
+      background: #444;
+    }
+
     /* Main area */
     #main {
       flex-grow: 1;
@@ -89,7 +117,13 @@
       padding: 20px;
       overflow: hidden;
     }
-    h1 { font-size: 24px; margin-bottom: 10px; text-align: center; }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
     #chatbox {
       flex-grow: 1;
       background: rgba(255, 255, 255, 0.1);
@@ -97,6 +131,7 @@
       padding: 20px;
       overflow-y: auto;
     }
+
     .message {
       margin: 10px 0;
       padding: 10px;
@@ -104,23 +139,36 @@
       max-width: 80%;
       word-wrap: break-word;
     }
-    .user { background: #4cafef; color: white; text-align: right; margin-left: auto; }
-    .ai   { background: #2ecc71; color: white; text-align: left; margin-right: auto; }
+
+    .user {
+      background: #4cafef;
+      color: white;
+      text-align: right;
+      margin-left: auto;
+    }
+
+    .ai {
+      background: #2ecc71;
+      color: white;
+      text-align: left;
+      margin-right: auto;
+    }
+
     #controls {
       margin-top: 12px;
       display: flex;
-      flex-wrap: wrap;
       gap: 8px;
       justify-content: center;
     }
+
     input {
       padding: 10px;
       border-radius: 8px;
       border: none;
-      flex: 1;
-      min-width: 160px;
+      width: 300px;
       font-size: 16px;
     }
+
     button {
       padding: 10px 15px;
       border: none;
@@ -130,55 +178,57 @@
       color: white;
       font-size: 16px;
     }
-    button:hover { background: #e68900; }
-    .thinking { opacity: 0.85; font-style: italic; }
+
+    button:hover {
+      background: #e68900;
+    }
+
+    .thinking {
+      opacity: 0.85;
+      font-style: italic;
+    }
+
     .read-btn {
       margin-top: 6px;
       background: #1976d2;
       font-size: 14px;
       padding: 6px 10px;
     }
-    .stop-btn { background: #d32f2f; }
-    .stop-btn:hover { background: #b71c1c; }
+
+    .stop-btn {
+      background: #d32f2f;
+    }
+
     /* --- List formatting inside AI messages --- */
-    .ai ol, .ai ul { margin-left: 20px; }
-    .ai li { margin: 4px 0; }
-    /* Mobile adjustments */
-    @media (max-width: 768px) {
-      body { flex-direction: column; }
-      #sidebar {
-        width: 100%;
-        height: 180px;
-        flex-direction: row;
-        overflow-x: auto;
-        border-right: none;
-        border-bottom: 2px solid #2e3b4e;
-      }
-      #main { flex-grow: 1; height: calc(100vh - 180px); }
+    .ai ol, .ai ul {
+      margin-left: 20px;
+    }
+
+    .ai li {
+      margin: 4px 0;
     }
   </style>
 </head>
 <body>
   <!-- Sidebar -->
   <div id="sidebar">
-    <div style="flex:1; display:flex; flex-direction:column;">
-      <h2>Chats</h2>
-      <button class="sidebar-btn" onclick="newChat()">➕ New Chat</button>
-      <input type="text" id="searchInput" placeholder="🔍 Search chats"
-             style="margin-top:10px; padding:6px; border-radius:6px; border:none; width:100%;">
-      <div id="chatList"></div>
-    </div>
+    <h2>Chats</h2>
+    <button class="sidebar-btn" onclick="newChat()">➕ New Chat</button>
+    <input type="text" id="searchInput" placeholder="🔍 Search chats"
+           style="margin-top:10px; padding:6px; border-radius:6px; border:none; width:100%;">
+    <div id="chatList"></div>
   </div>
 
   <!-- Main -->
   <div id="main">
     <h1>🎤 Groq Voice Assistant</h1>
-    <div id="chatbox"><p><em>🤖 Hello! I am your AI assistant. Ask me anything.</em></p></div>
+    <div id="chatbox">
+      <p><em>🤖 Hello! I am your AI assistant. Ask me anything.</em></p>
+    </div>
 
     <form id="chatForm" onsubmit="return handleSubmit(event)">
       <div id="controls">
         <input type="text" id="userInput" placeholder="Type your question..." autocomplete="off" />
-        <select id="voiceSelect"></select>
         <button id="askBtn" type="submit">Ask</button>
         <button type="button" onclick="startVoiceInput()">🎙️ Speak</button>
         <button type="button" onclick="stopSpeech()" class="stop-btn">🔇 Stop</button>
@@ -192,24 +242,9 @@
     const askBtn = document.getElementById("askBtn");
     const chatList = document.getElementById("chatList");
     const searchInput = document.getElementById("searchInput");
-    const voiceSelect = document.getElementById("voiceSelect");
 
     let chats = JSON.parse(localStorage.getItem("chats") || "[]");
     let currentChatId = null;
-    let voices = [];
-
-    // Load voices for speech
-    function loadVoices() {
-      voices = speechSynthesis.getVoices();
-      voiceSelect.innerHTML = "";
-      voices.forEach((voice, i) => {
-        const option = document.createElement("option");
-        option.value = i;
-        option.textContent = `${voice.name} (${voice.lang})`;
-        voiceSelect.appendChild(option);
-      });
-    }
-    speechSynthesis.onvoiceschanged = loadVoices;
 
     function handleSubmit(e) {
       e.preventDefault();
@@ -236,8 +271,10 @@
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({ message: userMessage })
         });
+
         const data = await res.json();
 
+        // render as HTML (support lists, bold, etc.)
         thinkingEl.innerHTML = "🤖 " + formatMessage(data.response || "⚠️ No response");
         thinkingEl.classList.remove("thinking");
 
@@ -248,6 +285,7 @@
           readBtn.textContent = "Read full answer 🔊";
           readBtn.className = "read-btn";
           readBtn.onclick = () => speakText(data.response, true);
+
           thinkingEl.appendChild(document.createElement("br"));
           thinkingEl.appendChild(readBtn);
 
@@ -265,15 +303,16 @@
     // --- format AI response for lists ---
     function formatMessage(text) {
       if (!text) return "";
-      return text.replace(/\n/g, "<br>");
+      return text
+        .replace(/\n/g, "<br>")
+        .replace(/^\s*-\s+(.*)$/gm, "<ul><li>$1</li></ul>")
+        .replace(/^\s*\d+\.\s+(.*)$/gm, "<ol><li>$1</li></ol>");
     }
 
     function speakText(text, isFull) {
       stopSpeech();
       const speech = new SpeechSynthesisUtterance(text);
-      const selected = voices[voiceSelect.value] || voices[0];
-      speech.voice = selected;
-      speech.lang = selected?.lang || "en-US";
+      speech.lang = "en-US";
       speech.rate = isFull ? 1.05 : 1.15;
       window.speechSynthesis.speak(speech);
     }
@@ -306,7 +345,11 @@
     function addMessage(text, sender) {
       const msg = document.createElement("div");
       msg.className = "message " + sender;
-      msg.innerHTML = (sender === "ai" ? "🤖 " + formatMessage(text) : "🧑 " + text);
+      if (sender === "ai") {
+        msg.innerHTML = "🤖 " + formatMessage(text);
+      } else {
+        msg.textContent = "🧑 " + text;
+      }
       chatbox.appendChild(msg);
       chatbox.scrollTop = chatbox.scrollHeight;
       return msg;
@@ -327,7 +370,8 @@
       if (!chat) return;
       chat.messages.push(message);
       if (chat.messages.length === 1 && message.sender === "user") {
-        chat.title = message.text.slice(0, 20) + (message.text.length > 20 ? "..." : "");
+        chat.title = message.text.slice(0, 20) +
+                     (message.text.length > 20 ? "..." : "");
       }
       saveChats();
       renderChatList();
@@ -350,17 +394,21 @@
       chats.forEach(chat => {
         const chatItem = document.createElement("div");
         chatItem.className = "chat-item";
+
         const chatName = document.createElement("span");
         chatName.textContent = chat.title;
         chatItem.onclick = () => loadChat(chat.id);
 
         const menuContainer = document.createElement("div");
         menuContainer.className = "message-menu";
+
         const menuBtn = document.createElement("button");
         menuBtn.className = "menu-btn";
         menuBtn.textContent = "⋮";
+
         const menuOptions = document.createElement("div");
         menuOptions.className = "menu-options";
+
         ["Share", "Rename", "Archive", "Delete"].forEach(option => {
           const optBtn = document.createElement("button");
           optBtn.textContent = option;
@@ -371,6 +419,7 @@
           };
           menuOptions.appendChild(optBtn);
         });
+
         menuContainer.appendChild(menuBtn);
         menuContainer.appendChild(menuOptions);
         chatItem.appendChild(chatName);
@@ -379,7 +428,8 @@
 
         menuBtn.onclick = e => {
           e.stopPropagation();
-          menuOptions.style.display = menuOptions.style.display === "block" ? "none" : "block";
+          menuOptions.style.display =
+            menuOptions.style.display === "block" ? "none" : "block";
         };
       });
     }
@@ -392,7 +442,11 @@
           break;
         case "Rename":
           const newText = prompt("Enter new name:", chat.title);
-          if (newText) { chat.title = newText; saveChats(); renderChatList(); }
+          if (newText) {
+            chat.title = newText;
+            saveChats();
+            renderChatList();
+          }
           break;
         case "Archive":
           chatItem.style.opacity = "0.5";
@@ -412,7 +466,9 @@
       const q = searchInput.value.toLowerCase();
       document.querySelectorAll(".chat-item span").forEach(span => {
         const item = span.parentElement;
-        item.style.display = span.textContent.toLowerCase().includes(q) ? "flex" : "none";
+        item.style.display = span.textContent.toLowerCase().includes(q)
+          ? "flex"
+          : "none";
       });
     });
 
